@@ -41,6 +41,22 @@ public class EventServiceImpl implements EventService {
         return  mapToDTO(event);
     }
 
+    @Override
+    public EventDTO updateEvent(EventDTO eventDTO, int id){
+        // TODO: handle exception in here
+        Event event = eventRepository.findById(id).orElse(new Event());
+
+        event.setTitle(eventDTO.getTitle());
+        event.setDescription(eventDTO.getDescription());
+        event.setThumbnail(eventDTO.getThumbnail());
+        event.setStart_date(eventDTO.getStart_date());
+        event.setEnd_date(eventDTO.getEnd_date());
+        event.setUpdated_date(new Date());
+
+        Event updatedEvent =  eventRepository.save(event);
+        return  mapToDTO(updatedEvent);
+
+    }
 
 
 

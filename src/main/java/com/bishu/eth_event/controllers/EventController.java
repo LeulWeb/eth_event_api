@@ -37,10 +37,12 @@ public class EventController {
     }
 
     // update event
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Event> updateEvents(@PathVariable int id, @RequestBody EventDTO entityDTO){
-//
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<EventDTO> updateEvents(@PathVariable int id, @RequestBody EventDTO eventDTO){
+        EventDTO updatedEventDTO = eventService.updateEvent(eventDTO, id);
+        return ResponseEntity.ok(updatedEventDTO);
+
+    }
 
     // create events
     @PostMapping("/")

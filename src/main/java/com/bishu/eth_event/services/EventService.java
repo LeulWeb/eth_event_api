@@ -11,4 +11,5 @@ public interface EventService {
     Event createEvent(EventDTO eventDTO);
     List<EventDTO> allEvents();
     EventDTO getEventById(int id);
+    EventDTO updateEvent(EventDTO eventDTO, int id);
 }
