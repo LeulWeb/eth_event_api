@@ -2,6 +2,7 @@ package com.bishu.eth_event.services.impl;
 
 import com.bishu.eth_event.dto.EventDTO;
 import com.bishu.eth_event.entities.Event;
+import com.bishu.eth_event.exceptions.EventNotFoundException;
 import com.bishu.eth_event.repositories.EventRepository;
 import com.bishu.eth_event.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +38,14 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDTO getEventById(int id){
         //TODO: make this to handle exception
-        Event event = eventRepository.findById(id).orElse(new Event());
+        Event event = eventRepository.findById(id).orElseThrow(()-> new EventNotFoundException("No event found"));
         return  mapToDTO(event);
     }
 
     @Override
     public EventDTO updateEvent(EventDTO eventDTO, int id){
         // TODO: handle exception in here
-        Event event = eventRepository.findById(id).orElse(new Event());
+        Event event = eventRepository.findById(id).orElseThrow(()-> new EventNotFoundException("Not event found"));
 
         event.setTitle(eventDTO.getTitle());
         event.setDescription(eventDTO.getDescription());
@@ -60,7 +61,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void destoryEvent(int id){
-        eventRepository.deleteById(id);
+        Event event = eventRepository.findById(id).orElseThrow(()-> new EventNotFoundException("Not event found"));
+        eventRepository.delete(event);
     }
 
 
