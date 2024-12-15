@@ -53,9 +53,10 @@ public class EventController {
 
 
     // destroy events
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Event> destroyEvents(@PathVariable int id){
-//
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> destroyEvents(@PathVariable int id){
+        eventService.destoryEvent(id);
+        return  new ResponseEntity<String>("Event is removed",HttpStatus.OK);
+    }
 
 }

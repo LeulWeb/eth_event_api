@@ -12,4 +12,5 @@ public interface EventService {
     List<EventDTO> allEvents();
     EventDTO getEventById(int id);
     EventDTO updateEvent(EventDTO eventDTO, int id);
+    void destoryEvent(int id);
 }

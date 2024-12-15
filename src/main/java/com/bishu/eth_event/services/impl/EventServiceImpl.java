@@ -58,6 +58,11 @@ public class EventServiceImpl implements EventService {
 
     }
 
+    @Override
+    public void destoryEvent(int id){
+        eventRepository.deleteById(id);
+    }
+
 
 
     private EventDTO mapToDTO(Event event){
