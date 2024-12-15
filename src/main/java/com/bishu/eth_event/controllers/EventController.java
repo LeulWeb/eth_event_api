@@ -22,17 +22,19 @@ public class EventController {
     }
 
     // all events
-//    @GetMapping("/")
-//    public ResponseEntity<List<Event>> getAllEvents(){
-//
-//    }
+    @GetMapping("/")
+    public ResponseEntity<List<EventDTO>> getAllEvents(){
+        List<EventDTO> eventDTOList = eventService.allEvents();
+        return ResponseEntity.ok(eventDTOList);
+    }
 
 
     // single event
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Event> getEventsById(@PathVariable int id){
-//
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<EventDTO> getEventsById(@PathVariable int id){
+        EventDTO eventDTO = eventService.getEventById(id);
+        return ResponseEntity.ok(eventDTO);
+    }
 
     // update event
 //    @PutMapping("/{id}")

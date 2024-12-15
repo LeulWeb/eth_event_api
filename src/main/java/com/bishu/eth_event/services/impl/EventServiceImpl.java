@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -24,6 +26,19 @@ public class EventServiceImpl implements EventService {
         Event event = mapFromDTO(eventDTO);
         Event addedEvent = eventRepository.save(event);
         return  addedEvent;
+    }
+
+    @Override
+    public List<EventDTO> allEvents(){
+        List<Event> eventList =  eventRepository.findAll();
+        return eventList.stream().map(e -> mapToDTO(e)).collect(Collectors.toList());
+    }
+
+    @Override
+    public EventDTO getEventById(int id){
+        //TODO: make this to handle exception
+        Event event = eventRepository.findById(id).orElse(new Event());
+        return  mapToDTO(event);
     }
 
 
